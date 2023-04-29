@@ -13,6 +13,11 @@
   <:item title="Wholesale"><%= @product.wholesale %></:item>
   <:item title="Retail"><%= @product.retail %></:item>
   <:item title="Count"><%= @product.count %></:item>
+  <:item :if={@product.store} title="Store">
+    <%= Enum.map(@product.store, &("#{&1.identifier}")) 
+      |> Enum.join(', ') %>
+  </:item>
+  
 </.list>
 
 <.back navigate={~p"/products"}>Back to products</.back>
@@ -24,6 +29,7 @@
     title={@page_title}
     action={@live_action}
     product={@product}
+    stores={@stores}
     patch={~p"/products/#{@product}"}
   />
 </.modal>
