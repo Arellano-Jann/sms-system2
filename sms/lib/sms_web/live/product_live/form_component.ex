@@ -23,6 +23,7 @@ defmodule SmsWeb.ProductLive.FormComponent do
         <.input field={@form[:wholesale]} type="number" label="Wholesale" step="any" />
         <.input field={@form[:retail]} type="number" label="Retail" step="any" />
         <.input field={@form[:count]} type="number" label="Count" />
+        <.input field={@form[:store_id]} type="select" options={Enum.map(@stores, &({&1.identifier, &1.id}))} label="Store" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Product</.button>
         </:actions>
