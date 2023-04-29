@@ -18,12 +18,14 @@ defmodule SmsWeb.ProductLive.Index do
     socket
     |> assign(:page_title, "Edit Product")
     |> assign(:product, Business.get_product!(id))
+    |> assign(:stores, Business.list_stores()) # lists all stores available to the product for selection
   end
 
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Product")
     |> assign(:product, %Product{})
+    |> assign(:stores, Business.list_stores()) # lists all stores available to the product for selection
   end
 
   defp apply_action(socket, :index, _params) do
@@ -34,7 +36,7 @@ defmodule SmsWeb.ProductLive.Index do
 
   @impl true
   def handle_info({SmsWeb.ProductLive.FormComponent, {:saved, product}}, socket) do
-    {:noreply, stream_insert(socket, :products, product)}
+    {:noreply, stream_insert(socket, :products, product |> Repo.preload(:store, force: true))} # reloads on edit and inserts updates into the db
   end
 
   @impl true
