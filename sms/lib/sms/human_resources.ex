@@ -11,12 +11,12 @@ defmodule Sms.HumanResources do
       end
   end
 
-  def get_employee(id) do
-    with {:ok, response} = HTTPoison.get("http://localhost:4000/api/employees" <> "/#{id}"),
-      {:ok, values} = Jason.decode(response.body) do
-        IO.inspect(values)
-      end
-  end
+  # def get_employee(id) do
+  #   with {:ok, response} = HTTPoison.get("http://localhost:4000/api/employees" <> "/#{id}"),
+  #     {:ok, values} = Jason.decode(response.body) do
+  #       IO.inspect(values)
+  #     end
+  # end
 
   defp keys_to_atoms(json_list) do
     json_list
