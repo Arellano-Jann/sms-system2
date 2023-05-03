@@ -3,6 +3,7 @@ defmodule SmsWeb.ProductLive.Index do
 
   alias Sms.Business
   alias Sms.Business.Product
+  alias Sms.Repo
 
   @impl true
   def mount(_params, _session, socket) do
